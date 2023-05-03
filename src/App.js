@@ -10,7 +10,7 @@ function App(props) {
   return (
     <>
       <Buttons onlyOpen={setisOpen} />
-      <Read />
+      <Read onlyClose={setisOpen} />
       <br />
       <br />
       {isOpen && <Create onlyClose={setisOpen} />}
