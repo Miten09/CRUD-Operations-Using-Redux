@@ -8,12 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  FormActions,
-  deleteForm,
-  deleteUser,
-  editUser,
-} from "./store/slices/formslices";
+import { deleteUser, editUser } from "./store/slices/formslices";
 
 function Read({ onlyClose }) {
   const dispatch = useDispatch();
@@ -32,12 +27,14 @@ function Read({ onlyClose }) {
   }
 
   function handleEdit(select, id) {
-    console.log(select, id);
+    // console.log(select, id);
     onlyClose(true);
     sessionStorage.setItem("clientName", select.clientName);
     sessionStorage.setItem("publisher", select.publisher);
     sessionStorage.setItem("parentCompany", select.parentCompany);
-    dispatch(editUser({ select, id }));
+    sessionStorage.setItem("id", id);
+
+    // dispatch(editUser({ select, id }));
   }
 
   return (
@@ -69,7 +66,7 @@ function Read({ onlyClose }) {
           </TableHead>
           {select.map((value, index) => {
             return (
-              <TableBody key={value}>
+              <TableBody key={value} index={index}>
                 <StyledTableCell
                   style={{ fontSize: "25px", paddingLeft: "35px" }}
                 >

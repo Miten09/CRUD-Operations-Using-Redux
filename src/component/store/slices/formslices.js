@@ -19,16 +19,39 @@ const FormSlice = createSlice({
       });
     },
     editUser: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
 
-      state.form.map((user) => {
-        console.log(user);
-        // console.log(action.payload.select);
+      const newIndex = sessionStorage.getItem("id");
+      // console.log(newIndex);
 
-        if (user.id === action.payload.id) {
-          user.form = action.payload.form;
+      const updatedForm = state.form.map((value, index) => {
+        // console.log(index);
+        // console.log(newIndex);
+        if (index == newIndex) {
+          // console.log(value.clientName);
+          // console.log(action.payload.clientName);
+          return (
+            (value.clientName = action.payload.clientName),
+            (value.publisher = action.payload.publisher),
+            (value.parentCompany = action.payload.parentCompany)
+          );
+        } else {
+          return value;
         }
       });
+
+      console.log(updatedForm);
+      // const objIndex = state.form.findIndex((obj, index) => {
+      //   console.log(index);
+      //   console.log(action.payload.id);
+
+      //   return index === action.payload.id;
+      // });
+      // console.log(objIndex);
+      // // console.log(action.payload.select.clientName);
+      // // console.log(state.form[objIndex].clientName);
+
+      // state.form[objIndex].clientName = action.payload.select.clientName;
     },
   },
 });

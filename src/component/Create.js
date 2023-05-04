@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { useDispatch } from "react-redux";
-import { FormActions, setNewform } from "./store/slices/formslices";
+import { useDispatch, useSelector } from "react-redux";
+import { FormActions, editUser, setNewform } from "./store/slices/formslices";
 
 function Create({ onlyClose }) {
   const [form, setform] = useState({
@@ -31,14 +31,25 @@ function Create({ onlyClose }) {
       parentCompany: sessionStorage.getItem("parentCompany"),
     });
   }, []);
-
   function handleSave() {
     // e.preventDefault();
     onlyClose(false);
+    // console.log(form)
+    // if( sessionStorage.getItem("clientName")){
+    //   edit
+    // }else {
+
+    // }
     dispatch(setNewform(form));
     // dispatch(FormActions.setReset({form:''}));
-    setform("");
+
     // console.log(form);
+  }
+
+  function handleUpdate() {
+    onlyClose(false);
+    // console.log(form);
+    dispatch(editUser(form, sessionStorage.getItem("id")));
   }
   return (
     <form onSubmit={handleSave}>
@@ -81,6 +92,14 @@ function Create({ onlyClose }) {
           onClick={() => onlyClose(false)}
         >
           Close
+        </Button>
+        <Button
+          variant="contained"
+          size="medium"
+          style={{ marginLeft: "2%" }}
+          onClick={handleUpdate}
+        >
+          Update
         </Button>
       </div>
     </form>
