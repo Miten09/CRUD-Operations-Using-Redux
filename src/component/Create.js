@@ -36,26 +36,29 @@ function Create({ onlyClose }) {
     // e.preventDefault();
     onlyClose(false);
     // console.log(form)
-    // if( sessionStorage.getItem("clientName")){
-    //   edit
-    // }else {
+    if (sessionStorage.getItem("clientName")) {
+      dispatch(editUser(form, sessionStorage.getItem("id")));
+    } else {
+      dispatch(setNewform(form));
+    }
 
-    // }
-    dispatch(setNewform(form));
     // dispatch(FormActions.setReset({form:''}));
 
     // console.log(form);
   }
 
-  function handleUpdate() {
-    onlyClose(false);
-    // console.log(form);
-    dispatch(editUser(form, sessionStorage.getItem("id")));
-  }
+  // function handleUpdate() {
+  //   onlyClose(false);
+  //   // console.log(form);
+
+  // }
   return (
     <>
       <div className="modal-wrapper" onClick={() => onlyClose(false)}></div>
       <div className="modal-container">
+        <h3 style={{ textAlign: "center", paddingBottom: "30px" }}>
+          {sessionStorage.getItem("clientName") ? "Edit Client" : "Add Client"}
+        </h3>
         <form onSubmit={handleSave}>
           <TextField
             label="Client Name"
@@ -81,7 +84,7 @@ function Create({ onlyClose }) {
             onChange={handleChange}
           />
           <div
-            style={{ display: "flex", marginTop: "35px", marginLeft: "20%" }}
+            style={{ display: "flex", marginTop: "35px", marginLeft: "40%" }}
           >
             <Button
               variant="contained"
@@ -89,7 +92,7 @@ function Create({ onlyClose }) {
               style={{ marginLeft: "45%" }}
               onClick={handleSave}
             >
-              Add Client
+              Save Changes
             </Button>
             <Button
               variant="contained"
@@ -99,14 +102,14 @@ function Create({ onlyClose }) {
             >
               Close
             </Button>
-            <Button
+            {/* <Button
               variant="contained"
               size="medium"
               style={{ marginLeft: "2%" }}
-              onClick={handleUpdate}
+              // onClick={handleUpdate}
             >
               Update
-            </Button>
+            </Button> */}
           </div>
         </form>
       </div>
