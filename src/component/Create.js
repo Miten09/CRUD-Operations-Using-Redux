@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { useDispatch, useSelector } from "react-redux";
-import { FormActions, editUser, setNewform } from "./store/slices/formslices";
+import { useDispatch } from "react-redux";
+import { editUser, setNewform } from "./store/slices/formslices";
 
 function Create({ onlyClose }) {
   const [form, setform] = useState({
@@ -31,6 +31,7 @@ function Create({ onlyClose }) {
       parentCompany: sessionStorage.getItem("parentCompany"),
     });
   }, []);
+
   function handleSave() {
     // e.preventDefault();
     onlyClose(false);
@@ -52,57 +53,64 @@ function Create({ onlyClose }) {
     dispatch(editUser(form, sessionStorage.getItem("id")));
   }
   return (
-    <form onSubmit={handleSave}>
-      <TextField
-        label="Client Name"
-        name="clientName"
-        value={form.clientName}
-        variant="outlined"
-        onChange={handleChange}
-      />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <TextField
-        label="Publisher"
-        variant="outlined"
-        name="publisher"
-        value={form.publisher}
-        onChange={handleChange}
-      />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <TextField
-        label="Parent Company"
-        name="parentCompany"
-        variant="outlined"
-        value={form.parentCompany}
-        onChange={handleChange}
-      />
-      <div style={{ display: "flex" }}>
-        <Button
-          variant="contained"
-          size="medium"
-          style={{ marginLeft: "45%" }}
-          onClick={handleSave}
-        >
-          Save Changes
-        </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          style={{ marginLeft: "2%" }}
-          onClick={() => onlyClose(false)}
-        >
-          Close
-        </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          style={{ marginLeft: "2%" }}
-          onClick={handleUpdate}
-        >
-          Update
-        </Button>
+    <>
+      <div className="modal-wrapper"></div>
+      <div className="modal-container">
+        <form onSubmit={handleSave} style={{ textAlign: "center" }}>
+          <TextField
+            label="Client Name"
+            name="clientName"
+            value={form.clientName}
+            variant="outlined"
+            onChange={handleChange}
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <TextField
+            label="Publisher"
+            variant="outlined"
+            name="publisher"
+            value={form.publisher}
+            onChange={handleChange}
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <TextField
+            label="Parent Company"
+            name="parentCompany"
+            variant="outlined"
+            value={form.parentCompany}
+            onChange={handleChange}
+          />
+          <div
+            style={{ display: "flex", marginTop: "35px", marginLeft: "10%" }}
+          >
+            <Button
+              variant="contained"
+              size="medium"
+              style={{ marginLeft: "45%" }}
+              onClick={handleSave}
+            >
+              Add Client
+            </Button>
+            <Button
+              variant="contained"
+              size="medium"
+              style={{ marginLeft: "2%" }}
+              onClick={() => onlyClose(false)}
+            >
+              Close
+            </Button>
+            <Button
+              variant="contained"
+              size="medium"
+              style={{ marginLeft: "2%" }}
+              onClick={handleUpdate}
+            >
+              Update
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
+    </>
   );
 }
 

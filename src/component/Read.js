@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import StyledTableCell from "@mui/material/TableCell";
+import StyledTableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { deleteUser, editUser } from "./store/slices/formslices";
+import { deleteUser } from "./store/slices/formslices";
 
 function Read({ onlyClose }) {
   const dispatch = useDispatch();
@@ -64,49 +64,54 @@ function Read({ onlyClose }) {
               ></StyledTableCell>
             </TableRow>
           </TableHead>
-          {select.map((value, index) => {
-            return (
-              <TableBody key={value} index={index}>
-                <StyledTableCell
-                  style={{ fontSize: "25px", paddingLeft: "35px" }}
-                >
-                  {value.clientName}
-                </StyledTableCell>
-                <StyledTableCell
-                  style={{ fontSize: "25px", paddingLeft: "35px" }}
-                >
-                  {value.publisher}
-                </StyledTableCell>
-                <StyledTableCell
-                  style={{ fontSize: "25px", paddingLeft: "35px" }}
-                >
-                  {value.parentCompany}
-                </StyledTableCell>
-                <StyledTableCell
-                  style={{ fontSize: "25px", paddingLeft: "35px" }}
-                >
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    onClick={() => handleEdit(value, index)}
+          <TableBody>
+            {select.map((value, index) => {
+              return (
+                <StyledTableRow key={index} index={index}>
+                  <StyledTableCell
+                    style={{ fontSize: "25px", paddingLeft: "35px" }}
+                    component="th"
+                    scope="row"
                   >
-                    Edit
-                  </button>
-                </StyledTableCell>
-                <StyledTableCell
-                  style={{ fontSize: "25px", paddingLeft: "35px" }}
-                >
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    onClick={() => handleDelete(index)}
+                    {value.clientName}
+                  </StyledTableCell>
+
+                  <StyledTableCell
+                    style={{ fontSize: "25px", paddingLeft: "35px" }}
                   >
-                    Delete
-                  </button>
-                </StyledTableCell>
-              </TableBody>
-            );
-          })}
+                    {value.publisher}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{ fontSize: "25px", paddingLeft: "35px" }}
+                  >
+                    {value.parentCompany}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{ fontSize: "25px", paddingLeft: "35px" }}
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={() => handleEdit(value, index)}
+                    >
+                      Edit
+                    </button>
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{ fontSize: "25px", paddingLeft: "35px" }}
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Delete
+                    </button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              );
+            })}
+          </TableBody>
         </Table>
       </TableContainer>
     </>

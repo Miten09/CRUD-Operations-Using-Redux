@@ -1,9 +1,13 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
 function Buttons({ onlyOpen }) {
   function addClient() {
     onlyOpen(true);
+    sessionStorage.removeItem("clientName");
+    sessionStorage.removeItem("publisher");
+    sessionStorage.removeItem("parentCompany");
+    sessionStorage.removeItem("id");
   }
 
   return (
