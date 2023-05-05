@@ -33,37 +33,29 @@ function Create({ onlyClose }) {
   }, []);
 
   function handleSave() {
-    // e.preventDefault();
     onlyClose(false);
-    // console.log(form)
     if (sessionStorage.getItem("clientName")) {
-      dispatch(editUser(form, sessionStorage.getItem("id")));
+      dispatch(editUser({ ...form, id: sessionStorage.getItem("id") }));
+      sessionStorage.clear();
     } else {
       dispatch(setNewform(form));
     }
-
-    // dispatch(FormActions.setReset({form:''}));
-
-    // console.log(form);
   }
 
-  // function handleUpdate() {
-  //   onlyClose(false);
-  //   // console.log(form);
+  const isEdit = sessionStorage.getItem("clientName") ? true : false;
 
-  // }
   return (
     <>
       <div className="modal-wrapper" onClick={() => onlyClose(false)}></div>
       <div className="modal-container">
         <h3 style={{ textAlign: "center", paddingBottom: "30px" }}>
-          {sessionStorage.getItem("clientName") ? "Edit Client" : "Add Client"}
+          {isEdit ? "Edit Client" : "Add Client"}
         </h3>
         <form onSubmit={handleSave}>
           <TextField
             label="Client Name"
             name="clientName"
-            value={form.clientName}
+            value={form.clientName || ""}
             variant="outlined"
             onChange={handleChange}
           />
@@ -72,7 +64,7 @@ function Create({ onlyClose }) {
             label="Publisher"
             variant="outlined"
             name="publisher"
-            value={form.publisher}
+            value={form.publisher || ""}
             onChange={handleChange}
           />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -80,7 +72,7 @@ function Create({ onlyClose }) {
             label="Parent Company"
             name="parentCompany"
             variant="outlined"
-            value={form.parentCompany}
+            value={form.parentCompany || " "}
             onChange={handleChange}
           />
           <div
@@ -93,9 +85,7 @@ function Create({ onlyClose }) {
               onClick={handleSave}
               className="btn btn-success"
             >
-              {sessionStorage.getItem("clientName")
-                ? "Save Changes"
-                : "Add Client "}
+              {isEdit ? "Save Changes" : "Add Client "}
             </button>
             <Button
               variant="contained"
@@ -105,14 +95,6 @@ function Create({ onlyClose }) {
             >
               Close
             </Button>
-            {/* <Button
-              variant="contained"
-              size="medium"
-              style={{ marginLeft: "2%" }}
-              // onClick={handleUpdate}
-            >
-              Update
-            </Button> */}
           </div>
         </form>
       </div>

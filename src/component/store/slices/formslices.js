@@ -10,48 +10,26 @@ const FormSlice = createSlice({
       state.form.push(action.payload);
     },
     setReset: (state, action) => {
-      state.form = "";
+      state.form = [];
     },
     deleteUser: (state, action) => {
       // console.log(action.payload);
-      state.form = state.form.filter((value, index) => {
-        return index !== action.payload;
-      });
+      state.form = state.form.filter((value, index) => index !== action.payload);
     },
     editUser: (state, action) => {
-      // console.log(action.payload);
 
-      const newIndex = sessionStorage.getItem("id");
       // console.log(newIndex);
 
       const updatedForm = state.form.map((value, index) => {
-        // console.log(index);
-        // console.log(newIndex);
-        if (index == newIndex) {
-          // console.log(value.clientName);
-          // console.log(action.payload.clientName);
-          return (
-            (value.clientName = action.payload.clientName),
-            (value.publisher = action.payload.publisher),
-            (value.parentCompany = action.payload.parentCompany)
-          );
+        if (index == action.payload.id) {
+          return action.payload;
         } else {
           return value;
         }
       });
-
+     state.form=updatedForm
+     
       console.log(updatedForm);
-      // const objIndex = state.form.findIndex((obj, index) => {
-      //   console.log(index);
-      //   console.log(action.payload.id);
-
-      //   return index === action.payload.id;
-      // });
-      // console.log(objIndex);
-      // // console.log(action.payload.select.clientName);
-      // // console.log(state.form[objIndex].clientName);
-
-      // state.form[objIndex].clientName = action.payload.select.clientName;
     },
   },
 });

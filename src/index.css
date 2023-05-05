@@ -32,6 +32,7 @@ code {
   background-color: white;
   padding: 2rem 3rem;
   border-radius: 0.5rem;
+  /* border: 2px solid black; */
   -webkit-border-radius: 0.5rem;
   -moz-border-radius: 0.5rem;
   -ms-border-radius: 0.5rem;
