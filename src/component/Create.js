@@ -84,16 +84,19 @@ function Create({ onlyClose }) {
             onChange={handleChange}
           />
           <div
-            style={{ display: "flex", marginTop: "35px", marginLeft: "40%" }}
+            style={{ display: "flex", marginTop: "35px", marginLeft: "45%" }}
           >
-            <Button
+            <button
               variant="contained"
               size="medium"
               style={{ marginLeft: "45%" }}
               onClick={handleSave}
+              className="btn btn-success"
             >
-              Save Changes
-            </Button>
+              {sessionStorage.getItem("clientName")
+                ? "Save Changes"
+                : "Add Client "}
+            </button>
             <Button
               variant="contained"
               size="medium"
