@@ -54,9 +54,9 @@ function Create({ onlyClose }) {
   }
   return (
     <>
-      <div className="modal-wrapper"></div>
+      <div className="modal-wrapper" onClick={() => onlyClose(false)}></div>
       <div className="modal-container">
-        <form onSubmit={handleSave} style={{ textAlign: "center" }}>
+        <form onSubmit={handleSave}>
           <TextField
             label="Client Name"
             name="clientName"
@@ -81,7 +81,7 @@ function Create({ onlyClose }) {
             onChange={handleChange}
           />
           <div
-            style={{ display: "flex", marginTop: "35px", marginLeft: "10%" }}
+            style={{ display: "flex", marginTop: "35px", marginLeft: "20%" }}
           >
             <Button
               variant="contained"
