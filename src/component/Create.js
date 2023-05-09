@@ -2,12 +2,7 @@ import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
-import {
-  deleteContact,
-  deleteUser,
-  editUser,
-  setNewform,
-} from "./store/slices/formslices";
+import { editUser, setNewform } from "./store/slices/formslices";
 
 function Create({ onlyClose }) {
   const [form, setform] = useState({
