@@ -34,7 +34,6 @@ function Create({ onlyClose }) {
     // console.log(value)
     // console.log(e.target.value);
     let text = e.target.value;
-    // console.log(e.target.value);
     let dummy = newcontact;
 
     console.log((dummy[index] = text));
@@ -44,7 +43,7 @@ function Create({ onlyClose }) {
   }
 
   function handleNumberSave() {
-    setNewContact([...newcontact, []]);
+    setNewContact([...newcontact, ""]);
     // setNewContact([]);
   }
 
