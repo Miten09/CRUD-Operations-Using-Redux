@@ -72,7 +72,10 @@ function Create({ onlyClose }) {
   return (
     <>
       <div className="modal-wrapper" onClick={() => onlyClose(false)}></div>
-      <div className="modal-container">
+      <div
+        className="modal-container"
+        style={{ overflowY: "scroll", maxHeight: "70%" }}
+      >
         <h3 style={{ textAlign: "center", paddingBottom: "30px" }}>
           {isEdit ? "Edit Client" : "Add Client"}
         </h3>
@@ -111,7 +114,15 @@ function Create({ onlyClose }) {
           <br />
           {newcontact.map((value, index) => {
             return (
-              <div style={{ display: "flex", gap: "5%" }} key={index}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "5%",
+                  padding: "1.5%",
+                  marginLeft: "-2%",
+                }}
+                key={index}
+              >
                 <TextField
                   label="Enter Your number"
                   variant="outlined"
