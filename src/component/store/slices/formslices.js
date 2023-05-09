@@ -14,12 +14,13 @@ const FormSlice = createSlice({
     },
     deleteUser: (state, action) => {
       // console.log(action.payload);
-      state.form = state.form.filter((value, index) => index !== action.payload);
+      state.form = state.form.filter(
+        (value, index) => index !== action.payload
+      );
     },
     editUser: (state, action) => {
-
-      // console.log(newIndex);
-
+      // console.log(index);
+      console.log(action.payload);
       const updatedForm = state.form.map((value, index) => {
         if (index == action.payload.id) {
           return action.payload;
@@ -27,9 +28,9 @@ const FormSlice = createSlice({
           return value;
         }
       });
-     state.form=updatedForm
-     
-      console.log(updatedForm);
+      state.form = updatedForm;
+
+      // console.log(updatedForm);
     },
   },
 });

@@ -4,7 +4,7 @@ import React from "react";
 function Buttons({ onlyOpen }) {
   function addClient() {
     onlyOpen(true);
-   
+    sessionStorage.clear();
   }
 
   return (

@@ -13,7 +13,7 @@ import { deleteUser } from "./store/slices/formslices";
 function Read({ onlyClose }) {
   const dispatch = useDispatch();
   const select = useSelector((state) => state.user.form);
-  // console.log(select);
+  console.log(select);
 
   function handleDelete(id) {
     // console.log(id);
@@ -29,9 +29,12 @@ function Read({ onlyClose }) {
   function handleEdit(select, id) {
     // console.log(select, id);
     onlyClose(true);
-    sessionStorage.setItem("clientName", select.clientName);
-    sessionStorage.setItem("publisher", select.publisher);
-    sessionStorage.setItem("parentCompany", select.parentCompany);
+    sessionStorage.setItem("clientName", select.form.clientName);
+    sessionStorage.setItem("publisher", select.form.publisher);
+    sessionStorage.setItem("parentCompany", select.form.parentCompany);
+    sessionStorage.setItem("newcontact-0", select.newcontact[0]);
+    sessionStorage.setItem("newcontact-1", select.newcontact[1]);
+    sessionStorage.setItem("newcontact-2", select.newcontact[2]);
     sessionStorage.setItem("id", id);
 
     // dispatch(editUser({ select, id }));
@@ -56,6 +59,9 @@ function Read({ onlyClose }) {
               <StyledTableCell style={{ fontSize: "20px", color: "white" }}>
                 Parent Company
               </StyledTableCell>
+              <StyledTableCell style={{ fontSize: "20px", color: "white" }}>
+                Contact
+              </StyledTableCell>
               <StyledTableCell
                 style={{ fontSize: "20px", color: "white" }}
               ></StyledTableCell>
@@ -67,24 +73,29 @@ function Read({ onlyClose }) {
           <TableBody>
             {select.map((value, index) => {
               return (
-                <StyledTableRow key={index} index={index}>
+                <StyledTableRow key={index}>
                   <StyledTableCell
                     style={{ fontSize: "25px", paddingLeft: "35px" }}
                     component="th"
                     scope="row"
                   >
-                    {value.clientName}
+                    {value.form.clientName}
                   </StyledTableCell>
 
                   <StyledTableCell
                     style={{ fontSize: "25px", paddingLeft: "35px" }}
                   >
-                    {value.publisher}
+                    {value.form.publisher}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ fontSize: "25px", paddingLeft: "35px" }}
                   >
-                    {value.parentCompany}
+                    {value.form.parentCompany}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{ fontSize: "25px", paddingLeft: "35px" }}
+                  >
+                    {value.newcontact}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ fontSize: "25px", paddingLeft: "35px" }}
