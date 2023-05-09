@@ -14,7 +14,6 @@ function Create({ onlyClose }) {
     clientName: "",
     publisher: "",
     parentCompany: "",
-    // contact: [],
   });
 
   const [newcontact, setNewContact] = useState([]);
@@ -31,20 +30,15 @@ function Create({ onlyClose }) {
   }
 
   function handleNumberChange(e, index) {
-    // console.log(value)
-    // console.log(e.target.value);
     let text = e.target.value;
     let dummy = newcontact;
 
-    console.log((dummy[index] = text));
+    dummy[index] = text;
     setNewContact(() => [...dummy]);
-    console.log(newcontact);
-    // console.log(text, index);
   }
 
   function handleNumberSave() {
     setNewContact([...newcontact, ""]);
-    // setNewContact([]);
   }
 
   useEffect(() => {
@@ -53,9 +47,9 @@ function Create({ onlyClose }) {
       publisher: sessionStorage.getItem("publisher"),
       parentCompany: sessionStorage.getItem("parentCompany"),
     });
-    console.log(sessionStorage.getItem("newcontact"));
+    // console.log(sessionStorage.getItem("newcontact"));
     let b = sessionStorage.getItem("newcontact")?.split(",");
-    console.log(b);
+    // console.log(b);
     setNewContact(b || []);
   }, []);
 
@@ -72,14 +66,12 @@ function Create({ onlyClose }) {
   }
 
   function handleDelete(id) {
-    // console.log(id);
     setNewContact((olditems) => {
       return olditems.filter((items, index) => {
         return index !== id;
       });
     });
   }
-  console.log("NEW contact ", newcontact);
   const isEdit = sessionStorage.getItem("clientName") ? true : false;
 
   return (
@@ -123,7 +115,6 @@ function Create({ onlyClose }) {
           <br />
           <br />
           {newcontact.map((value, index) => {
-            console.log(value);
             return (
               <div style={{ display: "flex", gap: "5%" }} key={index}>
                 <TextField
@@ -133,7 +124,7 @@ function Create({ onlyClose }) {
                   value={value}
                   onChange={(e) => handleNumberChange(e, index, value)}
                 />
-                {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+
                 <button
                   type="button"
                   className="btn btn-danger"

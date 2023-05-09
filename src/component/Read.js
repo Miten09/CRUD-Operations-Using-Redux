@@ -13,7 +13,6 @@ import { deleteUser } from "./store/slices/formslices";
 function Read({ onlyClose }) {
   const dispatch = useDispatch();
   const select = useSelector((state) => state.user.form);
-  console.log(select);
 
   function handleDelete(id) {
     // console.log(id);
@@ -27,10 +26,8 @@ function Read({ onlyClose }) {
   }
 
   function handleEdit(select, id) {
-    // console.log(select, id);
     onlyClose(true);
-    console.log(select);
-    console.log(select.clientName);
+
     sessionStorage.setItem(
       "clientName",
       select.clientName || select.form.clientName
@@ -43,10 +40,8 @@ function Read({ onlyClose }) {
       "parentCompany",
       select.parentCompany || select.form.parentCompany
     );
-   sessionStorage.setItem('newcontact',select.newcontact)
+    sessionStorage.setItem("newcontact", select.newcontact);
     sessionStorage.setItem("id", id);
-
-    // dispatch(editUser({ select, id }));
   }
 
   return (
@@ -81,7 +76,6 @@ function Read({ onlyClose }) {
           </TableHead>
           <TableBody>
             {select.map((value, index) => {
-              // console.log(value.form.clientName);
               return (
                 <StyledTableRow key={index}>
                   <StyledTableCell
