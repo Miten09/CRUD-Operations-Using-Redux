@@ -29,12 +29,21 @@ function Read({ onlyClose }) {
   function handleEdit(select, id) {
     // console.log(select, id);
     onlyClose(true);
-    sessionStorage.setItem("clientName", select.form.clientName);
-    sessionStorage.setItem("publisher", select.form.publisher);
-    sessionStorage.setItem("parentCompany", select.form.parentCompany);
-    sessionStorage.setItem("newcontact-0", select.newcontact[0]);
-    sessionStorage.setItem("newcontact-1", select.newcontact[1]);
-    sessionStorage.setItem("newcontact-2", select.newcontact[2]);
+    console.log(select);
+    console.log(select.clientName);
+    sessionStorage.setItem(
+      "clientName",
+      select.clientName || select.form.clientName
+    );
+    sessionStorage.setItem(
+      "publisher",
+      select.publisher || select.form.publisher
+    );
+    sessionStorage.setItem(
+      "parentCompany",
+      select.parentCompany || select.form.parentCompany
+    );
+   sessionStorage.setItem('newcontact',select.newcontact)
     sessionStorage.setItem("id", id);
 
     // dispatch(editUser({ select, id }));
@@ -72,6 +81,7 @@ function Read({ onlyClose }) {
           </TableHead>
           <TableBody>
             {select.map((value, index) => {
+              // console.log(value.form.clientName);
               return (
                 <StyledTableRow key={index}>
                   <StyledTableCell
@@ -79,18 +89,18 @@ function Read({ onlyClose }) {
                     component="th"
                     scope="row"
                   >
-                    {value.form.clientName}
+                    {value.clientName || value.form.clientName}
                   </StyledTableCell>
 
                   <StyledTableCell
                     style={{ fontSize: "25px", paddingLeft: "35px" }}
                   >
-                    {value.form.publisher}
+                    {value.publisher || value.form.publisher}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ fontSize: "25px", paddingLeft: "35px" }}
                   >
-                    {value.form.parentCompany}
+                    {value.parentCompany || value.form.parentCompany}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ fontSize: "25px", paddingLeft: "35px" }}

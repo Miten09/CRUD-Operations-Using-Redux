@@ -31,16 +31,16 @@ function Create({ onlyClose }) {
   }
 
   function handleNumberChange(e, index) {
-    // console.log(index);
+    // console.log(value)
     // console.log(e.target.value);
-    var text = e.target.value;
-    if (newcontact[index]) {
-      newcontact[index] = text;
-    } else {
-      newcontact[index] = [...newcontact, text];
-    }
+    let text = e.target.value;
+    // console.log(e.target.value);
+    let dummy = newcontact;
+
+    console.log((dummy[index] = text));
+    setNewContact(() => [...dummy]);
     console.log(newcontact);
-    console.log(text, index);
+    // console.log(text, index);
   }
 
   function handleNumberSave() {
@@ -54,17 +54,18 @@ function Create({ onlyClose }) {
       publisher: sessionStorage.getItem("publisher"),
       parentCompany: sessionStorage.getItem("parentCompany"),
     });
-    setNewContact([
-      sessionStorage.getItem("newcontact-0"),
-      sessionStorage.getItem("newcontact-1"),
-      sessionStorage.getItem("newcontact-2"),
-    ]);
+    console.log(sessionStorage.getItem("newcontact"));
+    let b = sessionStorage.getItem("newcontact")?.split(",");
+    console.log(b);
+    setNewContact(b || []);
   }, []);
 
   function handleSave() {
     onlyClose(false);
     if (sessionStorage.getItem("clientName")) {
-      dispatch(editUser({ ...form, id: sessionStorage.getItem("id") }));
+      dispatch(
+        editUser({ ...form, id: sessionStorage.getItem("id"), newcontact })
+      );
       sessionStorage.clear();
     } else {
       dispatch(setNewform({ form, newcontact }));
@@ -79,7 +80,7 @@ function Create({ onlyClose }) {
       });
     });
   }
-
+  console.log("NEW contact ", newcontact);
   const isEdit = sessionStorage.getItem("clientName") ? true : false;
 
   return (
@@ -123,13 +124,14 @@ function Create({ onlyClose }) {
           <br />
           <br />
           {newcontact.map((value, index) => {
+            console.log(value);
             return (
               <div style={{ display: "flex", gap: "5%" }} key={index}>
                 <TextField
                   label="Enter Your number"
                   variant="outlined"
                   name="phoneNumber"
-                  value={newcontact[index]}
+                  value={value}
                   onChange={(e) => handleNumberChange(e, index, value)}
                 />
                 {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
