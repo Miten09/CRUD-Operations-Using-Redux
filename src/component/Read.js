@@ -124,7 +124,7 @@ function Read({ onlyClose, nodata }) {
                     <StyledTableCell
                       style={{
                         fontSize: "25px",
-                        // paddingLeft: "35px",
+
                         textAlign: "center",
                         minWidth: "100px",
                       }}
@@ -137,7 +137,7 @@ function Read({ onlyClose, nodata }) {
                     <StyledTableCell
                       style={{
                         fontSize: "25px",
-                        // paddingLeft: "35px",
+
                         textAlign: "center",
                         minWidth: "100px",
                       }}
@@ -147,7 +147,7 @@ function Read({ onlyClose, nodata }) {
                     <StyledTableCell
                       style={{
                         fontSize: "25px",
-                        // paddingLeft: "35px",
+
                         textAlign: "center",
                         minWidth: "100px",
                       }}
@@ -157,17 +157,16 @@ function Read({ onlyClose, nodata }) {
                     <StyledTableCell
                       style={{
                         fontSize: "25px",
-                        // paddingLeft: "35px",
                         textAlign: "center",
                         minWidth: "100px",
                       }}
                     >
-                      {value.newcontact}
+                      {(index ? "," : "") + value.newcontact}
                     </StyledTableCell>
                     <StyledTableCell
                       style={{
                         fontSize: "25px",
-                        // paddingLeft: "35px",
+
                         textAlign: "center",
                         minWidth: "100px",
                       }}
