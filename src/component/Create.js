@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { editUser, setNewform } from "./store/slices/formslices";
+import { useForm } from "react-hook-form";
 
 function Create({ onlyClose, nodata }) {
   const [form, setform] = useState({
@@ -12,6 +13,12 @@ function Create({ onlyClose, nodata }) {
   });
 
   const [newcontact, setNewContact] = useState([]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const dispatch = useDispatch();
 
@@ -80,14 +87,17 @@ function Create({ onlyClose, nodata }) {
         <h3 style={{ textAlign: "center", paddingBottom: "30px" }}>
           {isEdit ? "Edit Client" : "Add Client"}
         </h3>
-        <form onSubmit={handleSave}>
+        <form onSubmit={handleSubmit(handleSave)}>
           <TextField
+            required
             label="Client Name"
             name="clientName"
             value={form.clientName || ""}
             variant="outlined"
             onChange={handleChange}
+            // {...register("clientName", { required: "clientName is Required" })}
           />
+          {/* <p style={{ color: "red" }}>{errors.clientName?.message}</p> */}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <TextField
             label="Publisher"
@@ -95,6 +105,7 @@ function Create({ onlyClose, nodata }) {
             name="publisher"
             value={form.publisher || ""}
             onChange={handleChange}
+            required
           />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <br />
@@ -105,6 +116,7 @@ function Create({ onlyClose, nodata }) {
             name="parentCompany"
             value={form.parentCompany || ""}
             onChange={handleChange}
+            required
           />
           <br />
           <br />
@@ -125,11 +137,12 @@ function Create({ onlyClose, nodata }) {
                 key={index}
               >
                 <TextField
-                  label={`Enter Your Number ${index ? index + 1 : "1"}`}
+                  label={`Mobile Number ${index ? index + 1 : "1"}`}
                   variant="outlined"
                   name="phoneNumber"
                   value={value}
                   onChange={(e) => handleNumberChange(e, index, value)}
+                  required
                 />
 
                 <button
