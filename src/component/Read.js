@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "./store/slices/formslices";
 
-function Read({ onlyClose }) {
+function Read({ onlyClose, nodata }) {
   const dispatch = useDispatch();
   const select = useSelector((state) => state.user.form);
 
@@ -53,80 +53,146 @@ function Read({ onlyClose }) {
           style={{ paddingLeft: "50px" }}
         >
           <TableHead style={{ backgroundColor: "black" }}>
-            <TableRow>
-              <StyledTableCell style={{ fontSize: "20px", color: "white" }}>
+            <TableRow style={{ textAlign: "center" }}>
+              <StyledTableCell
+                style={{
+                  fontSize: "20px",
+                  color: "white",
+                  textAlign: "center",
+                  minWidth: "100px",
+                }}
+              >
                 Client Name
               </StyledTableCell>
-              <StyledTableCell style={{ fontSize: "20px", color: "white" }}>
+              <StyledTableCell
+                style={{
+                  fontSize: "20px",
+                  color: "white",
+                  textAlign: "center",
+                  minWidth: "100px",
+                }}
+              >
                 Publisher
               </StyledTableCell>
-              <StyledTableCell style={{ fontSize: "20px", color: "white" }}>
+              <StyledTableCell
+                style={{
+                  fontSize: "20px",
+                  color: "white",
+                  textAlign: "center",
+                  minWidth: "100px",
+                }}
+              >
                 Parent Company
               </StyledTableCell>
-              <StyledTableCell style={{ fontSize: "20px", color: "white" }}>
+              <StyledTableCell
+                style={{
+                  fontSize: "20px",
+                  color: "white",
+                  textAlign: "center",
+                  minWidth: "100px",
+                }}
+              >
                 Contact
               </StyledTableCell>
               <StyledTableCell
-                style={{ fontSize: "20px", color: "white" }}
-              ></StyledTableCell>
-              <StyledTableCell
-                style={{ fontSize: "20px", color: "white" }}
-              ></StyledTableCell>
+                style={{
+                  fontSize: "20px",
+                  color: "white",
+                  textAlign: "center",
+                  minWidth: "170px",
+                }}
+              >
+                Action
+              </StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {select.map((value, index) => {
-              return (
-                <StyledTableRow key={index}>
-                  <StyledTableCell
-                    style={{ fontSize: "25px", paddingLeft: "35px" }}
-                    component="th"
-                    scope="row"
-                  >
-                    {value.clientName || value.form.clientName}
-                  </StyledTableCell>
+          {nodata ? (
+            <h4
+              style={{
+                marginLeft: "200%",
+                width: "100%",
+                paddingTop: "20px",
+              }}
+            >
+              <TableHead>No Data Found</TableHead>
+            </h4>
+          ) : (
+            <TableBody style={{}}>
+              {select.map((value, index) => {
+                return (
+                  <StyledTableRow key={index}>
+                    <StyledTableCell
+                      style={{
+                        fontSize: "25px",
+                        // paddingLeft: "35px",
+                        textAlign: "center",
+                        minWidth: "100px",
+                      }}
+                      component="th"
+                      scope="row"
+                    >
+                      {value.clientName || value.form.clientName}
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                    style={{ fontSize: "25px", paddingLeft: "35px" }}
-                  >
-                    {value.publisher || value.form.publisher}
-                  </StyledTableCell>
-                  <StyledTableCell
-                    style={{ fontSize: "25px", paddingLeft: "35px" }}
-                  >
-                    {value.parentCompany || value.form.parentCompany}
-                  </StyledTableCell>
-                  <StyledTableCell
-                    style={{ fontSize: "25px", paddingLeft: "35px" }}
-                  >
-                    {value.newcontact}
-                  </StyledTableCell>
-                  <StyledTableCell
-                    style={{ fontSize: "25px", paddingLeft: "35px" }}
-                  >
-                    <button
-                      type="button"
-                      className="btn btn-warning"
-                      onClick={() => handleEdit(value, index)}
+                    <StyledTableCell
+                      style={{
+                        fontSize: "25px",
+                        // paddingLeft: "35px",
+                        textAlign: "center",
+                        minWidth: "100px",
+                      }}
                     >
-                      Edit
-                    </button>
-                  </StyledTableCell>
-                  <StyledTableCell
-                    style={{ fontSize: "25px", paddingLeft: "35px" }}
-                  >
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => handleDelete(index)}
+                      {value.publisher || value.form.publisher}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{
+                        fontSize: "25px",
+                        // paddingLeft: "35px",
+                        textAlign: "center",
+                        minWidth: "100px",
+                      }}
                     >
-                      Delete
-                    </button>
-                  </StyledTableCell>
-                </StyledTableRow>
-              );
-            })}
-          </TableBody>
+                      {value.parentCompany || value.form.parentCompany}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{
+                        fontSize: "25px",
+                        // paddingLeft: "35px",
+                        textAlign: "center",
+                        minWidth: "100px",
+                      }}
+                    >
+                      {value.newcontact}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{
+                        fontSize: "25px",
+                        // paddingLeft: "35px",
+                        textAlign: "center",
+                        minWidth: "100px",
+                      }}
+                    >
+                      <button
+                        type="button"
+                        className="btn btn-warning"
+                        onClick={() => handleEdit(value, index)}
+                      >
+                        Edit
+                      </button>
+                      &nbsp;&nbsp;
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => handleDelete(index)}
+                      >
+                        Delete
+                      </button>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                );
+              })}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
     </>

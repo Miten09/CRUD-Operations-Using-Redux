@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { editUser, setNewform } from "./store/slices/formslices";
 
-function Create({ onlyClose }) {
+function Create({ onlyClose, nodata }) {
   const [form, setform] = useState({
     clientName: "",
     publisher: "",
@@ -49,6 +49,7 @@ function Create({ onlyClose }) {
   }, []);
 
   function handleSave() {
+    nodata(false);
     onlyClose(false);
     if (sessionStorage.getItem("clientName")) {
       dispatch(
@@ -100,9 +101,9 @@ function Create({ onlyClose }) {
           <br />
           <TextField
             label="Parent Company"
-            name="parentCompany"
             variant="outlined"
-            value={form.parentCompany || " "}
+            name="parentCompany"
+            value={form.parentCompany || ""}
             onChange={handleChange}
           />
           <br />
@@ -142,12 +143,15 @@ function Create({ onlyClose }) {
             );
           })}
           <div
-            style={{ display: "flex", marginTop: "35px", marginLeft: "45%" }}
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: "20px",
+            }}
           >
             <button
               variant="contained"
               size="medium"
-              style={{ marginLeft: "30%" }}
               onClick={handleSave}
               className="btn btn-success"
             >
