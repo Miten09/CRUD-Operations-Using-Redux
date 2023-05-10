@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { editUser, setNewform } from "./store/slices/formslices";
-import { useForm } from "react-hook-form";
 
 function Create({ onlyClose, nodata }) {
   const [form, setform] = useState({
@@ -13,12 +12,6 @@ function Create({ onlyClose, nodata }) {
   });
 
   const [newcontact, setNewContact] = useState([]);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   const dispatch = useDispatch();
 
@@ -87,7 +80,7 @@ function Create({ onlyClose, nodata }) {
         <h3 style={{ textAlign: "center", paddingBottom: "30px" }}>
           {isEdit ? "Edit Client" : "Add Client"}
         </h3>
-        <form onSubmit={handleSubmit(handleSave)}>
+        <form onSubmit={handleSave}>
           <TextField
             required
             label="Client Name"
@@ -95,9 +88,7 @@ function Create({ onlyClose, nodata }) {
             value={form.clientName || ""}
             variant="outlined"
             onChange={handleChange}
-            // {...register("clientName", { required: "clientName is Required" })}
           />
-          {/* <p style={{ color: "red" }}>{errors.clientName?.message}</p> */}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <TextField
             label="Publisher"
@@ -165,7 +156,6 @@ function Create({ onlyClose, nodata }) {
             <button
               variant="contained"
               size="medium"
-              onClick={handleSave}
               className="btn btn-success"
             >
               {isEdit ? "Save Changes" : "Add Client "}
